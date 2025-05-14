@@ -24,3 +24,6 @@ Modifier un utilisateur:
 
 Rechercher un utilisateur:
 - `go run main.go --action="rechercher" --nom="<nom>"`
+
+Lancer les tests:
+- `go test ./annuaire -v`
