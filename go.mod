@@ -1,3 +1,3 @@
-module github.com/yanisrz/tp1
+module github.com/Nebsu/tp1
 
 go 1.24.3

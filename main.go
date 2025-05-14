@@ -3,21 +3,23 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/Nebsu/tp1/annuaire"
 	"os"
-
-	"github.com/yanisrz/tp1/annuaire"
 )
 
 func main() {
 	action := flag.String("action", "", "Action à réaliser (ajouter, rechercher, lister, supprimer, modifier)")
 	name := flag.String("nom", "", "Nom de la personne")
 	phone := flag.String("tel", "", "Numéro de téléphone")
-	newPhone := flag.String("nouveau-tel", "", "Nouveau numéro de téléphone (pour modification)")
+	newPhone := flag.String("nouveau-tel", "", "Nouveau numéro de téléphone")
 
 	flag.Parse()
 
 	pb := annuaire.New()
-	pb.LoadFromFile("contacts.json")
+	err := pb.LoadFromFile("contacts.json")
+	if err != nil {
+		os.Exit(1)
+	}
 
 	switch *action {
 	case "ajouter":
@@ -83,5 +85,8 @@ func main() {
 		fmt.Println("Action non reconnue. Utilisez: ajouter, rechercher, lister, supprimer ou modifier")
 		os.Exit(1)
 	}
-	pb.SaveToFile("contacts.json")
+	err = pb.SaveToFile("contacts.json")
+	if err != nil {
+		return
+	}
 }

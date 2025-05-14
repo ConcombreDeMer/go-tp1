@@ -51,7 +51,7 @@ func (pb *Annuaire) ListContacts() []Contact {
 
 func (pb *Annuaire) RemoveContact(name string) bool {
 	contactFound := false
-	newContactsList := []Contact{}
+	var newContactsList []Contact
 	for _, contact := range pb.Contacts {
 		if contact.Name != name {
 			newContactsList = append(newContactsList, contact)
@@ -80,7 +80,7 @@ func (pb *Annuaire) UpdateContact(name, newPhone string) bool {
 func (pb *Annuaire) SaveToFile(filename string) error {
 	data, err := json.Marshal(pb)
 	if err != nil {
-		return fmt.Errorf("erreur lors de la sérialisation de l'annuaire: %w", err)
+		return fmt.Errorf("erreur lors de la traduction de l'annuaire: %w", err)
 	}
 
 	err = os.WriteFile(filename, data, 0644)
@@ -92,10 +92,6 @@ func (pb *Annuaire) SaveToFile(filename string) error {
 }
 
 func (pb *Annuaire) LoadFromFile(filename string) error {
-	if _, err := os.Stat(filename); os.IsNotExist(err) {
-		return nil
-	}
-
 	data, err := os.ReadFile(filename)
 	if err != nil {
 		return fmt.Errorf("erreur lors de la lecture du fichier: %w", err)
@@ -103,8 +99,7 @@ func (pb *Annuaire) LoadFromFile(filename string) error {
 
 	err = json.Unmarshal(data, pb)
 	if err != nil {
-		return fmt.Errorf("erreur lors de la désérialisation de l'annuaire: %w", err)
+		return fmt.Errorf("erreur lors de la traduction de l'annuaire: %w", err)
 	}
-
 	return nil
 }
