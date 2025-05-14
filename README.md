@@ -20,7 +20,7 @@ Lister les utilisateurs:
 - `go run main.go --action="lister"`
 
 Modifier un utilisateur:
-- `go run main.go --action="modifier" --nom="<nom>" --tel="<nouveau numero de tel>"`
+- `go run main.go --action="modifier" --nom="<nom>" --nouveau-tel="<nouveau numero de tel>"`
 
 Rechercher un utilisateur:
 - `go run main.go --action="rechercher" --nom="<nom>"`
